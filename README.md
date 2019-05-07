@@ -30,6 +30,8 @@ Public function - changePassword (This will return true/false if password can be
 * New password passes all password requirements
 * New and old password are less than 80% similar
 
+Test case data is provided using TestNg's 'dataProvider' method. In order to test this application with different test data, please PasswordTest.java and add test data in String array.
+
 Password similarity:
 Password can be considered similar when a sequence of characters is present in the old password is also present in the new password. We can have a solution of this problem in following ways:
 * Checking the availability of sequences of characters of new password in old password string and vice versa. Sequence occurrence should be less than 80% of max length of string (new or old) - This algorithm is applied in the code.
