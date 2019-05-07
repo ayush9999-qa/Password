@@ -12,11 +12,18 @@ public class SimilarPassword
     public static void main( String[] args )
     {
         System.out.println( "Hello World!" );
-        String test = "Tesqwertttttyuiopsdfgcvbn@1234"; 
-        if (validatePassword(test))
-        	System.out.println("Password correctly validated");
-        else
-        	System.out.println("Password incorrectly validated");
+//        String test = "Tesqwertttttyuiopsdfgcvbn@1234"; 
+//        if (validatePassword(test))
+//        	System.out.println("Password correctly validated");
+//        else
+//        	System.out.println("Password incorrectly validated");
+        
+        String newPassword = "abcdefghijklm";
+        String oldPassword = "abcdefghijkln";
+        if (comparePasswords(oldPassword, newPassword))
+        	System.out.println("Accepted password");
+        else 
+        	System.out.println("Rejected password");
     }
     
     public static boolean validatePassword(String newPassword) {
@@ -115,4 +122,58 @@ public class SimilarPassword
     	}
     	return (upperCharPresent && lowerCharPresent && numberPresent && specialCharPresent);
     }
+
+    private static boolean comparePasswords(String oldPassword, String newPassword) {
+    	if (oldPassword.contains(newPassword) || newPassword.contains(oldPassword))
+    		return false;
+    	
+    	int oldPasswordLength = oldPassword.length();
+    	int newPasswordLength = newPassword.length();
+    	int similarityIndex = 0;
+    	
+    	if (oldPasswordLength >= newPasswordLength)
+    		similarityIndex = comparePasswordsNO(oldPassword, newPassword);
+    	else
+    		similarityIndex = comparePasswordsNO(newPassword, oldPassword);
+    	
+    	int max = Integer.max(newPasswordLength, oldPasswordLength);
+    	
+    	if ((((double)similarityIndex / max) * 100) > 80)
+    		return false;
+    	else
+    		return true;    	
+    }
+
+	private static int comparePasswordsNO(String oldPassword, String newPassword) {
+		int oldPasswordLength = oldPassword.length();
+    	int newPasswordLength = newPassword.length();
+    	int similarityIndex = 0;
+    	
+    	char[] oldPasswordChars = oldPassword.toCharArray();
+    	char[] newPasswordChars = newPassword.toCharArray();
+    	
+//    	for (int j = 0, i = 0; j < newPasswordLength ; i++) {
+//    		for (int i = 0; i < oldPasswordLength; i++) {
+//    			if (oldPasswordChars[i] == newPasswordChars[j]) {
+//    				j++;
+//    				similarityIndex++;
+//    			}
+//    		}
+//    	}
+    	
+    	int j = 0;
+    	for (int i = 0; i < oldPasswordChars.length ; i++) {    		
+    		if (oldPasswordChars[i] == newPasswordChars[j] && j < newPasswordChars.length) {
+    			j++;
+    			similarityIndex++;
+    		}
+    	}
+    	
+		return similarityIndex;
+	}
+
+	private static int comparePasswordsON(String oldPassword, String newPassword) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }
