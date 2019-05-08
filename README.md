@@ -19,6 +19,7 @@ Run tests -
 * Clone project from Bitbucket repository
 * Import Maven project in Eclipse
 * Wait till Eclipse resolve the dependencies
+* Install TestNg pllugin
 * Right click on 'testng.xml' and run as TestNg tests
 * Verify output on Console or verify using /test-output/index.html
 
